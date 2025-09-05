@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>张无忌的博客</title>
+  <icon>http://example.com/icon.png</icon>
+  <subtitle>无忌的世界探索记录</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2025-09-04T14:30:41.774Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>张无忌</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2025/09/04/hello-world/"/>
+    <id>http://example.com/2025/09/04/hello-world/</id>
+    <published>2025-09-04T14:56:20.092Z</published>
+    <updated>2025-09-04T14:30:41.774Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a class=&quot;link&quot;   href=&quot;https://hexo.io/&quot; &gt;Hexo&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/a&gt;! This is your very first post.</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
