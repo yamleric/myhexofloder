@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-09-04T14:30:41.774Z</updated>
+  <updated>2025-09-07T07:48:06.170Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一个学生时代想法的出现和落地</title>
+    <link href="http://example.com/2025/09/07/%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E7%9A%84%E5%87%BA%E7%8E%B0%E5%92%8C%E8%90%BD%E5%9C%B0/"/>
+    <id>http://example.com/2025/09/07/%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E7%9A%84%E5%87%BA%E7%8E%B0%E5%92%8C%E8%90%BD%E5%9C%B0/</id>
+    <published>2025-09-07T05:27:53.000Z</published>
+    <updated>2025-09-07T07:48:06.170Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一个学生时代想法的出现和落地&quot;&gt;&lt;a href=&quot;#一个学生时代想法的出现和落地&quot; class=&quot;headerlink&quot; title=&quot;一个学生时代想法的出现和落地&quot;&gt;&lt;/a&gt;一个学生时代想法的出现和落地&lt;/h1&gt;&lt;p&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="Github项目" scheme="http://example.com/categories/Github%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="记录" scheme="http://example.com/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
