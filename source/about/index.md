@@ -1,4 +1,4 @@
-title: About
+title: about
 date: 2025-09-08 13:28:09
 ---
 # 关于我 #
