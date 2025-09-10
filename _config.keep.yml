@@ -41,7 +41,8 @@ menu:
   # links: /links               # || fa-solid fa-link
   # photos: /photos             # || fa-solid fa-image
   # tools: /tools               # || fa-solid fa-tools
-  about: /about               # || fa-solid fa-user-graduate
+  about: /about
+  参考资料: /参考资料               # || fa-solid fa-user-graduate
   # ......
 
 
