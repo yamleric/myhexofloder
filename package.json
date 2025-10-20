@@ -12,7 +12,7 @@
     "version": "7.3.0"
   },
   "dependencies": {
-    "eslint": "^9.35.0",
+    "eslint": "^9.38.0",
     "hexo": "^7.0.0",
     "hexo-bridge": "^2.0.4",
     "hexo-generator-archive": "^2.0.0",
