@@ -9,7 +9,7 @@
     
     <title>
         
-            JAVA接口和类的区别以及如何配合使用 |
+            郑州龙头科技企业 |
         
         张无忌的博客
     </title>
@@ -184,7 +184,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        JAVA接口和类的区别以及如何配合使用
+                        郑州龙头科技企业
                     </div>
                 
 
@@ -212,13 +212,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2025-10-03 23:35:16</span>
+                <span class="datetime">2025-09-23 23:40:50</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Fri Oct 03 2025 23:35:54 GMT+0800">2025-10-03 23:35:54</span>
+                    <span class="datetime" data-updated="Wed Sep 24 2025 10:24:17 GMT+0800">2025-09-24 10:24:17</span>
                 </span>
             
         
@@ -230,12 +230,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.4k 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>257 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
             </span>
         
         
@@ -253,60 +253,8 @@
                     
 
                     
-                         <p>我们来详细探讨一下Java中类（Class）和接口（Interface）如何配合使用，以及为什么这样设计是Java语言的核心优势之一。</p>
-<h3 id="核心概念：各自的职责"><a href="#核心概念：各自的职责" class="headerlink" title="核心概念：各自的职责"></a>核心概念：各自的职责</h3><p>要理解它们如何配合，首先要明白它们各自是什么：</p>
-<ul>
-<li><p><strong>类 (Class):</strong> 是一个<strong>蓝图</strong>或<strong>模板</strong>，用于创建具有共同属性（字段）和行为（方法）的对象。一个类可以<strong>具体地实现</strong>某些功能。例如，一个 <code>Car</code> 类可以有 <code>color</code> 属性和 <code>startEngine()</code> 方法。类是对“是什么”的描述。</p>
-</li>
-<li><p><strong>接口 (Interface):</strong> 是一个<strong>行为的规范</strong>或<strong>合同</strong>。它只定义了应该<strong>做什么</strong>（有哪些方法），但不关心<strong>怎么做</strong>（方法的具体实现）。例如，一个 <code>Flyable</code> 接口可以定义一个 <code>fly()</code> 方法，但它不写 <code>fly()</code> 里面具体怎么飞。接口是对“能做什么”的描述。</p>
-</li>
-</ul>
-<h3 id="类与接口如何配合使用？"><a href="#类与接口如何配合使用？" class="headerlink" title="类与接口如何配合使用？"></a>类与接口如何配合使用？</h3><p>类和接口最核心的配合方式是： <strong>一个或多个类去实现（implements）一个或多个接口</strong>。</p>
-<p>这意味着类向外界承诺：“我遵守了这个接口（合同）里定义的所有规范，并且我已经提供了所有这些规范（方法）的具体实现。”</p>
-<p><strong>代码示例：</strong></p>
-<p>假设我们有一个“飞行”的行为规范。</p>
-<p><strong>1. 定义接口 (合同)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个“能飞”的规范 (Flyable.java)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">    <span class="comment">// 任何实现了这个接口的类，都必须提供 fly() 方法的具体实现</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">fly</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 创建实现该接口的类 (蓝图)</strong></p>
-<p>不同的事物有不同的飞行方式，所以我们创建不同的类来实现这个接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bird 类实现了 Flyable 接口 (Bird.java)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Bird</span> <span class="keyword">implements</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fly</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;鸟儿在扇动翅膀飞翔...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Airplane 类也实现了 Flyable 接口 (Airplane.java)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Airplane</span> <span class="keyword">implements</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fly</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;飞机依靠引擎和机翼在空中飞行...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Superman 类，他也能飞 (Superman.java)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Superman</span> <span class="keyword">implements</span> <span class="title class_">Flyable</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fly</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;超人举起拳头，嗖的一声飞走了！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>3. 在代码中使用</strong></p>
-<p>现在，我们可以利用这种配合关系来编写更灵活、更通用的代码。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Airport</span> &#123;</span><br><span class="line">    <span class="comment">// 这个方法可以接受任何“能飞”的东西，而不需要关心它具体是鸟、飞机还是超人</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">letItFly</span><span class="params">(Flyable thing)</span> &#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;准备起飞: &quot;</span>);</span><br><span class="line">        thing.fly();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Airport</span> <span class="variable">airport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Airport</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建不同的实例</span></span><br><span class="line">        <span class="type">Bird</span> <span class="variable">sparrow</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Bird</span>();</span><br><span class="line">        <span class="type">Airplane</span> <span class="variable">boeing747</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Airplane</span>();</span><br><span class="line">        <span class="type">Superman</span> <span class="variable">clarkKent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Superman</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将它们都交给 airport 的 letItFly 方法处理</span></span><br><span class="line">        airport.letItFly(sparrow);    <span class="comment">// 输出: 准备起飞: 鸟儿在扇动翅膀飞翔...</span></span><br><span class="line">        airport.letItFly(boeing747);  <span class="comment">// 输出: 准备起飞: 飞机依靠引擎和机翼在空中飞行...</span></span><br><span class="line">        airport.letItFly(clarkKent);  <span class="comment">// 输出: 准备起飞: 超人举起拳头，嗖的一声飞走了！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="为什么需要这种配合？——-面向接口编程的核心优势"><a href="#为什么需要这种配合？——-面向接口编程的核心优势" class="headerlink" title="为什么需要这种配合？—— 面向接口编程的核心优势"></a>为什么需要这种配合？—— 面向接口编程的核心优势</h3><p>这种“定义规范-提供实现”的模式是Java设计的基石，带来了巨大的好处，这就是<strong>面向接口编程 (Programming to an Interface)</strong> 的思想。</p>
-<ol>
-<li><p><strong>实现解耦 (Decoupling)</strong></p>
-<ul>
-<li><strong>调用者与实现者分离</strong>：在上面的例子中，<code>Airport</code> 类（调用者）只依赖于 <code>Flyable</code> 这个接口，它根本不知道也不关心 <code>Bird</code> 或 <code>Airplane</code> 的内部实现细节。</li>
-<li><strong>易于替换和扩展</strong>：如果未来我们增加了一个新的能飞的东西，比如 <code>Drone</code> (无人机)，我们只需要创建一个新的 <code>Drone</code> 类实现 <code>Flyable</code> 接口，而完全<strong>不需要修改</strong> <code>Airport</code> 类的任何代码。<code>Airport</code> 天然就支持 <code>Drone</code> 的飞行。这极大地提高了代码的可维护性和扩展性。</li>
-</ul>
-</li>
-<li><p><strong>定义标准和规范</strong></p>
-<ul>
-<li>在大型项目中，接口可以作为不同模块或团队之间的“合同”。例如，一个团队负责定义数据存储的接口 <code>DataAccess</code>（包含 <code>save()</code>, <code>delete()</code>, <code>findById()</code> 等方法），另一个团队可以基于这个接口开发业务逻辑，同时数据库团队可以分别提供 <code>MySqlDataAccessImpl</code> 和 <code>OracleDataAccessImpl</code> 两种实现。未来更换数据库时，业务逻辑代码完全不受影响。</li>
-</ul>
-</li>
-<li><p><strong>实现多态 (Polymorphism)</strong></p>
-<ul>
-<li>多态是面向对象的三大特性之一。接口是实现多态的绝佳方式。<code>Flyable thing</code> 这个变量，在运行时可以指向 <code>Bird</code> 对象、<code>Airplane</code> 对象或 <code>Superman</code> 对象，并根据对象的实际类型调用相应的方法。这让代码变得非常灵活和通用。</li>
-</ul>
-</li>
-<li><p><strong>突破类的单继承限制</strong></p>
-<ul>
-<li>在Java中，一个类只能继承（extends）一个父类，这被称为<strong>单继承</strong>。但一个类可以<strong>实现（implements）多个接口</strong>。</li>
-<li>这使得一个类可以同时具备多种“能力”。例如，一个“智能水陆两栖无人机”类，可以同时实现 <code>Flyable</code>（能飞）、<code>Swimmable</code>（能游）和 <code>Photographable</code>（能拍照）三个接口，从而拥有了这三种能力。</li>
-</ul>
-</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>简单来说，类和接口的配合使用是一种**“关注什么 vs 关注怎么做”**的分工合作模式：</p>
-<ul>
-<li><strong>接口</strong> 负责定义 <strong>“需要做什么”</strong> 的高层抽象规范。</li>
-<li><strong>类</strong> 负责提供 <strong>“具体怎么做”</strong> 的底层细节实现。</li>
-</ul>
-<p>通过这种方式，我们构建的软件系统耦合度更低、扩展性更强、维护也更加容易，这也是现代软件工程中设计高质量、可复用代码的关键原则。</p>
+                         <h1 id="郑州龙头科技企业"><a href="#郑州龙头科技企业" class="headerlink" title="郑州龙头科技企业"></a>郑州龙头科技企业</h1><p>偶然刷到有人分享成功获得了寒假实习岗位，感觉目前压力又回来了。梳理一下本人了解过的郑州本地的IT企业。<br>超聚变 郑州总部规模大于1000人<br>华为郑州 不详 估计大于500人<br>浪潮郑州 不详（听说不行）<br>数字马力郑州 郑州规模大于1000人<br>阿里巴巴郑州 约100人<br>紫光郑州 约400人<br>用友河南 约400人</p>
+<h1 id="个人感想"><a href="#个人感想" class="headerlink" title="个人感想"></a>个人感想</h1><p>看了看本地公司，首先是觉得自己实力不足<br>其次是感觉郑州岗位太少了，整个IT行业估计也就10w人的规模<br>但是2026届的毕业生都有2w人了（轻工业2000，郑大1500，工大1500，中原工1500，河大2000，财经政法1500，其他大中专院校更是数不胜数）<br>前10%的人大概率会去外省求职，剩下30%的人在本省求职，剩下的是考研和转行的。<br>真是难啊。</p>
 
                     
                 </div>
@@ -353,14 +301,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2025-10-04-%E5%BC%80%E5%8F%91%E5%9C%BA%E6%99%AF%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4.html"
-                                   title="开发场景常用Git命令"
+                                   href="/posts/Maven-%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%E7%B2%BE%E7%AE%80%E6%80%BB%E7%BB%93/"
+                                   title="Maven 打包命令精简总结"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">开发场景常用Git命令</span>
+                                        <span class="post-nav-title-item text-ellipsis">Maven 打包命令精简总结</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -370,11 +318,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2025-09-25-Maven-%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%E7%B2%BE%E7%AE%80%E6%80%BB%E7%BB%93.html"
-                                   title="Maven 打包命令精简总结"
+                                   href="/posts/%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E7%9A%84%E5%87%BA%E7%8E%B0%E5%92%8C%E8%90%BD%E5%9C%B0/"
+                                   title="一个学生时代想法的出现和落地"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Maven 打包命令精简总结</span>
+                                        <span class="post-nav-title-item text-ellipsis">一个学生时代想法的出现和落地</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -402,7 +350,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9A%E5%90%84%E8%87%AA%E7%9A%84%E8%81%8C%E8%B4%A3"><span class="nav-text">核心概念：各自的职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-text">类与接口如何配合使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%BF%99%E7%A7%8D%E9%85%8D%E5%90%88%EF%BC%9F%E2%80%94%E2%80%94-%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="nav-text">为什么需要这种配合？—— 面向接口编程的核心优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%91%E5%B7%9E%E9%BE%99%E5%A4%B4%E7%A7%91%E6%8A%80%E4%BC%81%E4%B8%9A"><span class="nav-text">郑州龙头科技企业</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%83%B3"><span class="nav-text">个人感想</span></a></li></ol>
     </div>
 </div>
 
@@ -533,7 +481,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9A%E5%90%84%E8%87%AA%E7%9A%84%E8%81%8C%E8%B4%A3"><span class="nav-text">核心概念：各自的职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-text">类与接口如何配合使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%BF%99%E7%A7%8D%E9%85%8D%E5%90%88%EF%BC%9F%E2%80%94%E2%80%94-%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="nav-text">为什么需要这种配合？—— 面向接口编程的核心优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%91%E5%B7%9E%E9%BE%99%E5%A4%B4%E7%A7%91%E6%8A%80%E4%BC%81%E4%B8%9A"><span class="nav-text">郑州龙头科技企业</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%83%B3"><span class="nav-text">个人感想</span></a></li></ol>
     </div>
 </div>
 
