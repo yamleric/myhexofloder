@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>张无忌的博客</title>
+  <icon>https://blog.toujinggai.dpdns.org/icon.png</icon>
+  <subtitle>无忌的世界探索记录</subtitle>
+  <link href="https://blog.toujinggai.dpdns.org/atom.xml" rel="self"/>
+  
+  <link href="https://blog.toujinggai.dpdns.org/"/>
+  <updated>2025-11-14T04:14:22.355Z</updated>
+  <id>https://blog.toujinggai.dpdns.org/</id>
+  
+  <author>
+    <name>张无忌</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot Maven 依赖管理实用建议</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-11-14-Spring-Boot-Maven-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-11-14-Spring-Boot-Maven-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE.html</id>
+    <published>2025-11-14T04:13:07.000Z</published>
+    <updated>2025-11-14T04:14:22.355Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Spring-Boot-Maven-依赖管理实用建议&quot;&gt;&lt;a href=&quot;#Spring-Boot-Maven-依赖管理实用建议&quot; class=&quot;headerlink&quot; title=&quot;Spring Boot Maven 依赖管理实用建议&quot;&gt;&lt;/a&gt;Spring</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>RAG完整指南：从理解到实践</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-11-12-RAG%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E7%90%86%E8%A7%A3%E5%88%B0%E5%AE%9E%E8%B7%B5.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-11-12-RAG%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E7%90%86%E8%A7%A3%E5%88%B0%E5%AE%9E%E8%B7%B5.html</id>
+    <published>2025-11-12T12:36:08.000Z</published>
+    <updated>2025-11-12T12:46:07.303Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;RAG-完整指南：从理解到实践&quot;&gt;&lt;a href=&quot;#RAG-完整指南：从理解到实践&quot; class=&quot;headerlink&quot; title=&quot;RAG 完整指南：从理解到实践&quot;&gt;&lt;/a&gt;RAG 完整指南：从理解到实践&lt;/h1&gt;&lt;p&gt;我将为你系统性地讲解 RAG</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>区分和总结小挑、大挑、互联网+三个顶级双创赛事</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-11-03-%E5%B0%8F%E6%8C%91%EF%BC%8C%E5%A4%A7%E6%8C%91%EF%BC%8C%E4%BA%92%E8%81%94%E7%BD%91-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-11-03-%E5%B0%8F%E6%8C%91%EF%BC%8C%E5%A4%A7%E6%8C%91%EF%BC%8C%E4%BA%92%E8%81%94%E7%BD%91-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF.html</id>
+    <published>2025-11-03T06:21:46.000Z</published>
+    <updated>2025-11-03T15:13:30.527Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;本文目的是区分和总结 &lt;strong&gt;小挑、大挑、互联网+&lt;/strong&gt; 这三个顶级双创赛事：&lt;/p&gt;
+&lt;h2 id=&quot;📊-三大赛事核心对比表&quot;&gt;&lt;a href=&quot;#📊-三大赛事核心对比表&quot; class=&quot;headerlink&quot; title=&quot;📊</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2025年软件工程大学生双创比赛全面指南</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-11-03-2025%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8F%AF%E5%8F%82%E5%8A%A0%E7%9A%84%E5%8F%8C%E5%88%9B%E8%B5%9B%E4%BA%8B%E6%B1%87%E6%80%BB.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-11-03-2025%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8F%AF%E5%8F%82%E5%8A%A0%E7%9A%84%E5%8F%8C%E5%88%9B%E8%B5%9B%E4%BA%8B%E6%B1%87%E6%80%BB.html</id>
+    <published>2025-11-03T06:16:58.000Z</published>
+    <updated>2025-11-03T15:13:48.637Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;🏆-2025年软件工程大学生双创比赛全面指南&quot;&gt;&lt;a href=&quot;#🏆-2025年软件工程大学生双创比赛全面指南&quot; class=&quot;headerlink&quot; title=&quot;🏆 2025年软件工程大学生双创比赛全面指南&quot;&gt;&lt;/a&gt;🏆</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>开发场景常用Git命令</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-10-04-%E5%BC%80%E5%8F%91%E5%9C%BA%E6%99%AF%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-10-04-%E5%BC%80%E5%8F%91%E5%9C%BA%E6%99%AF%E5%B8%B8%E7%94%A8Git%E5%91%BD%E4%BB%A4.html</id>
+    <published>2025-10-03T16:02:53.000Z</published>
+    <updated>2025-10-21T09:16:36.245Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Git是当今软件开发领域不可或缺的版本控制系统。无论是个人项目还是团队协作，掌握Git常用命令都是一项基本技能。本文总结了Git在日常使用中最核心的命令，帮助开发者高效地管理代码。&lt;/p&gt;
+&lt;h3 id=&quot;Git基本工作流程&quot;&gt;&lt;a href=&quot;#Git基本工作流程&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA接口和类的区别以及如何配合使用</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-10-03-JAVA%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-10-03-JAVA%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8.html</id>
+    <published>2025-10-03T15:35:16.000Z</published>
+    <updated>2025-10-03T15:35:54.881Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;我们来详细探讨一下Java中类（Class）和接口（Interface）如何配合使用，以及为什么这样设计是Java语言的核心优势之一。&lt;/p&gt;
+&lt;h3 id=&quot;核心概念：各自的职责&quot;&gt;&lt;a href=&quot;#核心概念：各自的职责&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Maven 打包命令精简总结</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-09-25-Maven-%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%E7%B2%BE%E7%AE%80%E6%80%BB%E7%BB%93.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-09-25-Maven-%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%E7%B2%BE%E7%AE%80%E6%80%BB%E7%BB%93.html</id>
+    <published>2025-09-25T05:58:42.000Z</published>
+    <updated>2025-09-25T06:00:04.214Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;以下是 Maven 打包 Java 应用程序的常用命令总结，涵盖不同场景需求：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;基础打包命令&quot;&gt;&lt;a href=&quot;#基础打包命令&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>郑州龙头科技企业</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-09-23-%E9%83%91%E5%B7%9E%E9%BE%99%E5%A4%B4%E7%A7%91%E6%8A%80%E4%BC%81%E4%B8%9A.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-09-23-%E9%83%91%E5%B7%9E%E9%BE%99%E5%A4%B4%E7%A7%91%E6%8A%80%E4%BC%81%E4%B8%9A.html</id>
+    <published>2025-09-23T15:40:50.000Z</published>
+    <updated>2025-09-24T02:24:17.440Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;郑州龙头科技企业&quot;&gt;&lt;a href=&quot;#郑州龙头科技企业&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一个学生时代想法的出现和落地</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-09-07-%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E7%9A%84%E5%87%BA%E7%8E%B0%E5%92%8C%E8%90%BD%E5%9C%B0.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-09-07-%E4%B8%80%E4%B8%AA%E6%83%B3%E6%B3%95%E7%9A%84%E5%87%BA%E7%8E%B0%E5%92%8C%E8%90%BD%E5%9C%B0.html</id>
+    <published>2025-09-07T05:27:53.000Z</published>
+    <updated>2025-09-07T08:22:28.627Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一个学生时代想法的出现和落地&quot;&gt;&lt;a href=&quot;#一个学生时代想法的出现和落地&quot; class=&quot;headerlink&quot; title=&quot;一个学生时代想法的出现和落地&quot;&gt;&lt;/a&gt;一个学生时代想法的出现和落地&lt;/h1&gt;&lt;p&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="Github项目" scheme="https://blog.toujinggai.dpdns.org/categories/Github%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="记录" scheme="https://blog.toujinggai.dpdns.org/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://blog.toujinggai.dpdns.org/2025-09-04-hello-world.html"/>
+    <id>https://blog.toujinggai.dpdns.org/2025-09-04-hello-world.html</id>
+    <published>2025-09-04T14:56:20.092Z</published>
+    <updated>2025-09-04T14:30:41.774Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a class=&quot;link&quot;   href=&quot;https://hexo.io/&quot; &gt;Hexo&lt;i class=&quot;fas fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/a&gt;! This is your very first post.</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>

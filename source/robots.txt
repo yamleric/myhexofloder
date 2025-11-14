@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://blog.toujinggai.dpdns.org/sitemap.xml
+Sitemap: https://blog.toujinggai.dpdns.org/baidusitemap.xml

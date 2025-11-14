@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="静态博客,generator by hexo,张无忌,编程, 技术博客,技术分享">
+    <meta name="description" content="无忌的自留地">
+    <meta name="author" content="张无忌">
+    
+    <title>
+        
+            RAG完整指南：从理解到实践 |
+        
+        张无忌的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.toujinggai.dpdns.org","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张无忌的博客","author":"张无忌","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","about":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2025,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="张无忌的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张无忌的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        RAG完整指南：从理解到实践
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张无忌</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-11-12 20:36:08</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Wed Nov 12 2025 20:46:07 GMT+0800">2025-11-12 20:46:07</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.3k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>9 分钟</span>
+            </span>
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="RAG-完整指南：从理解到实践"><a href="#RAG-完整指南：从理解到实践" class="headerlink" title="RAG 完整指南：从理解到实践"></a>RAG 完整指南：从理解到实践</h1><p>我将为你系统性地讲解 RAG 的全部知识点，让你真正掌握它。</p>
+<h2 id="一、RAG-的本质理解"><a href="#一、RAG-的本质理解" class="headerlink" title="一、RAG 的本质理解"></a>一、RAG 的本质理解</h2><h3 id="1-1-为什么需要-RAG？"><a href="#1-1-为什么需要-RAG？" class="headerlink" title="1.1 为什么需要 RAG？"></a>1.1 为什么需要 RAG？</h3><p>传统大语言模型的局限：</p>
+<ul>
+<li><strong>知识截止日期</strong>：模型只知道训练时的信息（比如我的知识截止到2025年1月）</li>
+<li><strong>无法访问私有数据</strong>：不知道你公司的内部文档、数据库内容</li>
+<li><strong>容易产生幻觉</strong>：在不确定时可能编造信息</li>
+<li><strong>更新成本高</strong>：重新训练模型代价昂贵</li>
+</ul>
+<p><strong>RAG 的解决方案</strong>：让模型在回答时先”查资料”，就像学生考试时可以翻书一样。</p>
+<h3 id="1-2-RAG-工作流程图解"><a href="#1-2-RAG-工作流程图解" class="headerlink" title="1.2 RAG 工作流程图解"></a>1.2 RAG 工作流程图解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">用户提问 → 问题向量化 → 检索相关文档 → 重排序 → 构建提示词 → LLM生成答案</span><br><span class="line">   ↓           ↓              ↓            ↓         ↓           ↓</span><br><span class="line"> &quot;今年Q3     [0.2,        知识库中      选出最      &quot;参考以下    基于真实</span><br><span class="line">  销售额?&quot;   0.8,...]     搜索匹配     相关的3条    文档...&quot;     内容回答</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、RAG-核心技术组件"><a href="#二、RAG-核心技术组件" class="headerlink" title="二、RAG 核心技术组件"></a>二、RAG 核心技术组件</h2><h3 id="2-1-文档处理（Document-Processing）"><a href="#2-1-文档处理（Document-Processing）" class="headerlink" title="2.1 文档处理（Document Processing）"></a>2.1 文档处理（Document Processing）</h3><p><strong>步骤1：文档加载</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 支持的文档类型</span></span><br><span class="line">- PDF 文件</span><br><span class="line">- Word 文档</span><br><span class="line">- 网页 HTML</span><br><span class="line">- Markdown 文件</span><br><span class="line">- 数据库记录</span><br><span class="line">- API 返回数据</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤2：文本分块（Chunking）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">为什么要分块？</span><br><span class="line">- 模型有输入长度限制</span><br><span class="line">- 提高检索精确度</span><br><span class="line">- 控制成本</span><br><span class="line"></span><br><span class="line">常见分块策略：</span><br><span class="line">1. 固定长度：每500字一块</span><br><span class="line">2. 语义分块：按段落或章节</span><br><span class="line">3. 重叠分块：块之间有50字重叠（避免信息断裂）</span><br></pre></td></tr></table></figure>
+
+<p>示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文本分割器</span></span><br><span class="line">text_splitter = RecursiveCharacterTextSplitter(</span><br><span class="line">    chunk_size=<span class="number">500</span>,        <span class="comment"># 每块500字符</span></span><br><span class="line">    chunk_overlap=<span class="number">50</span>,      <span class="comment"># 重叠50字符</span></span><br><span class="line">    separators=[<span class="string">&quot;\n\n&quot;</span>, <span class="string">&quot;\n&quot;</span>, <span class="string">&quot;。&quot;</span>, <span class="string">&quot;!&quot;</span>, <span class="string">&quot;?&quot;</span>, <span class="string">&quot;；&quot;</span>]  <span class="comment"># 分割优先级</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分割文档</span></span><br><span class="line">chunks = text_splitter.split_text(long_document)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-向量化（Embedding）"><a href="#2-2-向量化（Embedding）" class="headerlink" title="2.2 向量化（Embedding）"></a>2.2 向量化（Embedding）</h3><p><strong>什么是 Embedding？</strong><br>把文本转换成数字向量，语义相似的文本向量距离近。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文本: &quot;今天天气真好&quot;  →  向量: [0.2, 0.8, -0.3, ..., 0.5]  (1536维)</span><br><span class="line">文本: &quot;今日天气不错&quot;  →  向量: [0.21, 0.79, -0.31, ..., 0.48]  (很接近!)</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用 Embedding 模型：</strong></p>
+<ul>
+<li>OpenAI: <code>text-embedding-3-small</code> (性价比高)</li>
+<li>OpenAI: <code>text-embedding-3-large</code> (精度更高)</li>
+<li>开源: <code>bge-large-zh</code> (中文效果好)</li>
+<li>多语言: <code>multilingual-e5-large</code></li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文本向量化</span></span><br><span class="line">response = client.embeddings.create(</span><br><span class="line">    model=<span class="string">&quot;text-embedding-3-small&quot;</span>,</span><br><span class="line">    <span class="built_in">input</span>=<span class="string">&quot;RAG是检索增强生成技术&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">vector = response.data[<span class="number">0</span>].embedding  <span class="comment"># 获取向量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(vector))  <span class="comment"># 1536维</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-向量数据库（Vector-Database）"><a href="#2-3-向量数据库（Vector-Database）" class="headerlink" title="2.3 向量数据库（Vector Database）"></a>2.3 向量数据库（Vector Database）</h3><p><strong>为什么需要向量数据库？</strong></p>
+<ul>
+<li>存储海量向量（百万级以上）</li>
+<li>快速相似度检索（毫秒级）</li>
+<li>支持元数据过滤</li>
+</ul>
+<p><strong>主流向量数据库：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Pinecone</strong></td>
+<td>云服务、易用</td>
+<td>快速原型、小团队</td>
+</tr>
+<tr>
+<td><strong>Weaviate</strong></td>
+<td>开源、功能全</td>
+<td>企业级应用</td>
+</tr>
+<tr>
+<td><strong>Chroma</strong></td>
+<td>轻量、本地</td>
+<td>开发测试</td>
+</tr>
+<tr>
+<td><strong>Milvus</strong></td>
+<td>高性能、可扩展</td>
+<td>大规模生产环境</td>
+</tr>
+<tr>
+<td><strong>Qdrant</strong></td>
+<td>Rust编写、快速</td>
+<td>对性能要求高的场景</td>
+</tr>
+</tbody></table>
+<p>代码示例（使用 Chroma）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chromadb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化客户端</span></span><br><span class="line">client = chromadb.Client()</span><br><span class="line">collection = client.create_collection(<span class="string">&quot;my_docs&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加文档</span></span><br><span class="line">collection.add(</span><br><span class="line">    documents=[<span class="string">&quot;RAG用于检索增强&quot;</span>, <span class="string">&quot;向量数据库存储embedding&quot;</span>],</span><br><span class="line">    metadatas=[&#123;<span class="string">&quot;source&quot;</span>: <span class="string">&quot;doc1&quot;</span>&#125;, &#123;<span class="string">&quot;source&quot;</span>: <span class="string">&quot;doc2&quot;</span>&#125;],</span><br><span class="line">    ids=[<span class="string">&quot;id1&quot;</span>, <span class="string">&quot;id2&quot;</span>]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索相似文档</span></span><br><span class="line">results = collection.query(</span><br><span class="line">    query_texts=[<span class="string">&quot;什么是RAG?&quot;</span>],</span><br><span class="line">    n_results=<span class="number">2</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(results[<span class="string">&#x27;documents&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-检索策略（Retrieval-Strategies）"><a href="#2-4-检索策略（Retrieval-Strategies）" class="headerlink" title="2.4 检索策略（Retrieval Strategies）"></a>2.4 检索策略（Retrieval Strategies）</h3><p><strong>1. 密集检索（Dense Retrieval）</strong></p>
+<ul>
+<li>使用向量相似度</li>
+<li>理解语义含义</li>
+<li>适合模糊查询</li>
+</ul>
+<p><strong>2. 稀疏检索（Sparse Retrieval）</strong></p>
+<ul>
+<li>传统关键词匹配（BM25）</li>
+<li>精确匹配能力强</li>
+<li>适合专有名词查询</li>
+</ul>
+<p><strong>3. 混合检索（Hybrid）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 结合两种方法</span></span><br><span class="line">dense_results = vector_search(query)      <span class="comment"># 70%权重</span></span><br><span class="line">sparse_results = keyword_search(query)    <span class="comment"># 30%权重</span></span><br><span class="line">final_results = merge_and_rerank(dense_results, sparse_results)</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 重排序（Reranking）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先粗筛（检索100条）</span></span><br><span class="line">candidates = retrieve_top_100(query)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再精排（使用更强模型选出前3条）</span></span><br><span class="line"><span class="keyword">from</span> sentence_transformers <span class="keyword">import</span> CrossEncoder</span><br><span class="line">reranker = CrossEncoder(<span class="string">&#x27;cross-encoder/ms-marco-MiniLM-L-12-v2&#x27;</span>)</span><br><span class="line"></span><br><span class="line">scores = reranker.predict([(query, doc) <span class="keyword">for</span> doc <span class="keyword">in</span> candidates])</span><br><span class="line">top_3 = get_top_k(candidates, scores, k=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="三、RAG-完整实现示例"><a href="#三、RAG-完整实现示例" class="headerlink" title="三、RAG 完整实现示例"></a>三、RAG 完整实现示例</h2><h3 id="3-1-基础-RAG-系统"><a href="#3-1-基础-RAG-系统" class="headerlink" title="3.1 基础 RAG 系统"></a>3.1 基础 RAG 系统</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.document_loaders <span class="keyword">import</span> PyPDFLoader</span><br><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"><span class="keyword">from</span> langchain.embeddings <span class="keyword">import</span> OpenAIEmbeddings</span><br><span class="line"><span class="keyword">from</span> langchain.vectorstores <span class="keyword">import</span> Chroma</span><br><span class="line"><span class="keyword">from</span> langchain.chat_models <span class="keyword">import</span> ChatOpenAI</span><br><span class="line"><span class="keyword">from</span> langchain.chains <span class="keyword">import</span> RetrievalQA</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤1: 加载文档</span></span><br><span class="line">loader = PyPDFLoader(<span class="string">&quot;company_handbook.pdf&quot;</span>)</span><br><span class="line">documents = loader.load()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤2: 分块</span></span><br><span class="line">text_splitter = RecursiveCharacterTextSplitter(</span><br><span class="line">    chunk_size=<span class="number">1000</span>,</span><br><span class="line">    chunk_overlap=<span class="number">100</span></span><br><span class="line">)</span><br><span class="line">chunks = text_splitter.split_documents(documents)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤3: 向量化并存储</span></span><br><span class="line">embeddings = OpenAIEmbeddings()</span><br><span class="line">vectorstore = Chroma.from_documents(chunks, embeddings)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤4: 创建检索器</span></span><br><span class="line">retriever = vectorstore.as_retriever(</span><br><span class="line">    search_type=<span class="string">&quot;similarity&quot;</span>,</span><br><span class="line">    search_kwargs=&#123;<span class="string">&quot;k&quot;</span>: <span class="number">3</span>&#125;  <span class="comment"># 返回最相关的3个文档块</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤5: 创建问答链</span></span><br><span class="line">llm = ChatOpenAI(model=<span class="string">&quot;gpt-4&quot;</span>, temperature=<span class="number">0</span>)</span><br><span class="line">qa_chain = RetrievalQA.from_chain_type(</span><br><span class="line">    llm=llm,</span><br><span class="line">    retriever=retriever,</span><br><span class="line">    return_source_documents=<span class="literal">True</span>  <span class="comment"># 返回来源文档</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 步骤6: 提问</span></span><br><span class="line">query = <span class="string">&quot;公司的年假政策是什么？&quot;</span></span><br><span class="line">result = qa_chain(&#123;<span class="string">&quot;query&quot;</span>: query&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;答案:&quot;</span>, result[<span class="string">&#x27;result&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;来源:&quot;</span>, result[<span class="string">&#x27;source_documents&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-高级-RAG-优化技术"><a href="#3-2-高级-RAG-优化技术" class="headerlink" title="3.2 高级 RAG 优化技术"></a>3.2 高级 RAG 优化技术</h3><p><strong>1. 查询改写（Query Rewriting）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用户问题可能表达不清晰，先让LLM改写</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rewrite_query</span>(<span class="params">original_query</span>):</span><br><span class="line">    prompt = <span class="string">f&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将以下用户问题改写得更清晰、更适合检索：</span></span><br><span class="line"><span class="string">    原问题: <span class="subst">&#123;original_query&#125;</span></span></span><br><span class="line"><span class="string">    改写后:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> llm.predict(prompt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">user_question = <span class="string">&quot;那个东西怎么用啊&quot;</span>  <span class="comment"># 模糊问题</span></span><br><span class="line">better_query = rewrite_query(user_question)  <span class="comment"># &quot;如何使用该产品的操作步骤&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 假设性文档嵌入（HyDE）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先让LLM生成一个假设的答案，再用这个答案去检索</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hyde_retrieval</span>(<span class="params">query</span>):</span><br><span class="line">    <span class="comment"># 生成假设答案</span></span><br><span class="line">    hypothetical_doc = llm.predict(<span class="string">f&quot;请回答: <span class="subst">&#123;query&#125;</span>&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 用假设答案的向量去检索（而不是用问题）</span></span><br><span class="line">    results = vectorstore.similarity_search(hypothetical_doc, k=<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">return</span> results</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 元数据过滤</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只检索特定类型的文档</span></span><br><span class="line">retriever = vectorstore.as_retriever(</span><br><span class="line">    search_kwargs=&#123;</span><br><span class="line">        <span class="string">&quot;k&quot;</span>: <span class="number">5</span>,</span><br><span class="line">        <span class="string">&quot;filter&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;source&quot;</span>: <span class="string">&quot;financial_reports&quot;</span>,  <span class="comment"># 只查财务报告</span></span><br><span class="line">            <span class="string">&quot;year&quot;</span>: <span class="number">2024</span>                     <span class="comment"># 只查2024年的</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="四、RAG-应用场景"><a href="#四、RAG-应用场景" class="headerlink" title="四、RAG 应用场景"></a>四、RAG 应用场景</h2><h3 id="4-1-企业知识库问答"><a href="#4-1-企业知识库问答" class="headerlink" title="4.1 企业知识库问答"></a>4.1 企业知识库问答</h3><p><strong>场景</strong>：员工查询公司政策、流程、技术文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">知识源: 员工手册、技术文档、历史邮件</span><br><span class="line">用户: &quot;如何申请远程办公？&quot;</span><br><span class="line">RAG: 检索HR政策 → 生成详细步骤和注意事项</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-客户服务机器人"><a href="#4-2-客户服务机器人" class="headerlink" title="4.2 客户服务机器人"></a>4.2 客户服务机器人</h3><p><strong>场景</strong>：7x24小时回答客户问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">知识源: 产品说明书、FAQ、客服记录</span><br><span class="line">用户: &quot;这款手机支持5G吗？&quot;</span><br><span class="line">RAG: 检索产品参数 → 给出准确答案并推荐套餐</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-法律-医疗辅助"><a href="#4-3-法律-医疗辅助" class="headerlink" title="4.3 法律&#x2F;医疗辅助"></a>4.3 法律&#x2F;医疗辅助</h3><p><strong>场景</strong>：辅助专业人员决策</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">知识源: 法律条文、判例、医学文献</span><br><span class="line">律师: &quot;类似案件的判决先例有哪些？&quot;</span><br><span class="line">RAG: 检索相关判例 → 总结关键点和判决依据</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-代码助手"><a href="#4-4-代码助手" class="headerlink" title="4.4 代码助手"></a>4.4 代码助手</h3><p><strong>场景</strong>：帮助开发者理解和使用代码库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">知识源: 代码仓库、API文档、技术博客</span><br><span class="line">开发者: &quot;如何使用我们的支付API？&quot;</span><br><span class="line">RAG: 检索API文档和示例代码 → 生成完整使用教程</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5-个人知识管理"><a href="#4-5-个人知识管理" class="headerlink" title="4.5 个人知识管理"></a>4.5 个人知识管理</h3><p><strong>场景</strong>：管理笔记、书籍、文章</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">知识源: Notion笔记、PDF书籍、收藏的文章</span><br><span class="line">你: &quot;我之前看的关于时间管理的方法是什么？&quot;</span><br><span class="line">RAG: 检索相关笔记 → 总结要点</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、RAG-vs-微调（Fine-tuning）"><a href="#五、RAG-vs-微调（Fine-tuning）" class="headerlink" title="五、RAG vs 微调（Fine-tuning）"></a>五、RAG vs 微调（Fine-tuning）</h2><table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>RAG</th>
+<th>微调</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>知识更新</strong></td>
+<td>实时更新，添加文档即可</td>
+<td>需要重新训练</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>低（只需存储和检索）</td>
+<td>高（需要GPU训练）</td>
+</tr>
+<tr>
+<td><strong>准确性</strong></td>
+<td>基于真实文档，可追溯</td>
+<td>知识融入模型，不可追溯</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>知识频繁变化、需要引用来源</td>
+<td>改变模型风格、行为模式</td>
+</tr>
+<tr>
+<td><strong>响应速度</strong></td>
+<td>稍慢（需要检索）</td>
+<td>快（直接生成）</td>
+</tr>
+</tbody></table>
+<p><strong>最佳实践</strong>：两者结合使用</p>
+<ul>
+<li>微调：调整模型的回答风格、格式</li>
+<li>RAG：提供最新的事实知识</li>
+</ul>
+<hr>
+<h2 id="六、RAG-常见问题和解决方案"><a href="#六、RAG-常见问题和解决方案" class="headerlink" title="六、RAG 常见问题和解决方案"></a>六、RAG 常见问题和解决方案</h2><h3 id="6-1-检索不准确"><a href="#6-1-检索不准确" class="headerlink" title="6.1 检索不准确"></a>6.1 检索不准确</h3><p><strong>问题</strong>：检索到的文档不相关</p>
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 改进分块策略</span></span><br><span class="line">- 使用语义分块而非固定长度</span><br><span class="line">- 增加上下文重叠</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用更好的 Embedding 模型</span></span><br><span class="line">embeddings = OpenAIEmbeddings(model=<span class="string">&quot;text-embedding-3-large&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 混合检索</span></span><br><span class="line"><span class="keyword">from</span> langchain.retrievers <span class="keyword">import</span> EnsembleRetriever</span><br><span class="line">ensemble = EnsembleRetriever(</span><br><span class="line">    retrievers=[vector_retriever, bm25_retriever],</span><br><span class="line">    weights=[<span class="number">0.7</span>, <span class="number">0.3</span>]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 添加重排序</span></span><br><span class="line"><span class="keyword">from</span> langchain.retrievers <span class="keyword">import</span> ContextualCompressionRetriever</span><br><span class="line"><span class="keyword">from</span> langchain.retrievers.document_compressors <span class="keyword">import</span> CohereRerank</span><br><span class="line"></span><br><span class="line">compressor = CohereRerank()</span><br><span class="line">compression_retriever = ContextualCompressionRetriever(</span><br><span class="line">    base_retriever=retriever,</span><br><span class="line">    base_compressor=compressor</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-答案产生幻觉"><a href="#6-2-答案产生幻觉" class="headerlink" title="6.2 答案产生幻觉"></a>6.2 答案产生幻觉</h3><p><strong>问题</strong>：模型编造不在文档中的信息</p>
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在提示词中明确要求</span></span><br><span class="line">prompt_template = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">基于以下文档回答问题。如果文档中没有相关信息，请明确说&quot;文档中未提供此信息&quot;。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">文档内容:</span></span><br><span class="line"><span class="string">&#123;context&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">问题: &#123;question&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">回答:</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用温度参数降低创造性</span></span><br><span class="line">llm = ChatOpenAI(temperature=<span class="number">0</span>)  <span class="comment"># 0表示最确定性的输出</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-性能优化"><a href="#6-3-性能优化" class="headerlink" title="6.3 性能优化"></a>6.3 性能优化</h3><p><strong>问题</strong>：检索和生成速度慢</p>
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 缓存常见查询</span></span><br><span class="line"><span class="keyword">from</span> langchain.cache <span class="keyword">import</span> InMemoryCache</span><br><span class="line">langchain.llm_cache = InMemoryCache()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 批量处理</span></span><br><span class="line">queries = [<span class="string">&quot;问题1&quot;</span>, <span class="string">&quot;问题2&quot;</span>, <span class="string">&quot;问题3&quot;</span>]</span><br><span class="line">embeddings = model.embed_documents(queries)  <span class="comment"># 一次性处理</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 异步检索</span></span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">async_retrieve</span>(<span class="params">query</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> vectorstore.asimilarity_search(query)</span><br><span class="line"></span><br><span class="line">results = <span class="keyword">await</span> asyncio.gather(*[async_retrieve(q) <span class="keyword">for</span> q <span class="keyword">in</span> queries])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 使用更快的向量数据库</span></span><br><span class="line"><span class="comment"># Qdrant (Rust) &gt; Milvus &gt; Chroma</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2025-11-14-Spring-Boot-Maven-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE.html"
+                                   title="Spring Boot Maven 依赖管理实用建议"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Spring Boot Maven 依赖管理实用建议</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025-11-03-%E5%B0%8F%E6%8C%91%EF%BC%8C%E5%A4%A7%E6%8C%91%EF%BC%8C%E4%BA%92%E8%81%94%E7%BD%91-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF.html"
+                                   title="区分和总结小挑、大挑、互联网+三个顶级双创赛事"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">区分和总结小挑、大挑、互联网+三个顶级双创赛事</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E7%90%86%E8%A7%A3%E5%88%B0%E5%AE%9E%E8%B7%B5"><span class="nav-text">RAG 完整指南：从理解到实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81RAG-%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%90%86%E8%A7%A3"><span class="nav-text">一、RAG 的本质理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-RAG%EF%BC%9F"><span class="nav-text">1.1 为什么需要 RAG？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-RAG-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="nav-text">1.2 RAG 工作流程图解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81RAG-%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="nav-text">二、RAG 核心技术组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86%EF%BC%88Document-Processing%EF%BC%89"><span class="nav-text">2.1 文档处理（Document Processing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%90%91%E9%87%8F%E5%8C%96%EF%BC%88Embedding%EF%BC%89"><span class="nav-text">2.2 向量化（Embedding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88Vector-Database%EF%BC%89"><span class="nav-text">2.3 向量数据库（Vector Database）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%A3%80%E7%B4%A2%E7%AD%96%E7%95%A5%EF%BC%88Retrieval-Strategies%EF%BC%89"><span class="nav-text">2.4 检索策略（Retrieval Strategies）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81RAG-%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0%E7%A4%BA%E4%BE%8B"><span class="nav-text">三、RAG 完整实现示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E7%A1%80-RAG-%E7%B3%BB%E7%BB%9F"><span class="nav-text">3.1 基础 RAG 系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%AB%98%E7%BA%A7-RAG-%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="nav-text">3.2 高级 RAG 优化技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81RAG-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">四、RAG 应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94"><span class="nav-text">4.1 企业知识库问答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%99%A8%E4%BA%BA"><span class="nav-text">4.2 客户服务机器人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%B3%95%E5%BE%8B-%E5%8C%BB%E7%96%97%E8%BE%85%E5%8A%A9"><span class="nav-text">4.3 法律&#x2F;医疗辅助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E4%BB%A3%E7%A0%81%E5%8A%A9%E6%89%8B"><span class="nav-text">4.4 代码助手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86"><span class="nav-text">4.5 个人知识管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81RAG-vs-%E5%BE%AE%E8%B0%83%EF%BC%88Fine-tuning%EF%BC%89"><span class="nav-text">五、RAG vs 微调（Fine-tuning）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81RAG-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">六、RAG 常见问题和解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%A3%80%E7%B4%A2%E4%B8%8D%E5%87%86%E7%A1%AE"><span class="nav-text">6.1 检索不准确</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%AD%94%E6%A1%88%E4%BA%A7%E7%94%9F%E5%B9%BB%E8%A7%89"><span class="nav-text">6.2 答案产生幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-text">6.3 性能优化</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张无忌</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG-%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97%EF%BC%9A%E4%BB%8E%E7%90%86%E8%A7%A3%E5%88%B0%E5%AE%9E%E8%B7%B5"><span class="nav-text">RAG 完整指南：从理解到实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81RAG-%E7%9A%84%E6%9C%AC%E8%B4%A8%E7%90%86%E8%A7%A3"><span class="nav-text">一、RAG 的本质理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-RAG%EF%BC%9F"><span class="nav-text">1.1 为什么需要 RAG？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-RAG-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="nav-text">1.2 RAG 工作流程图解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81RAG-%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6"><span class="nav-text">二、RAG 核心技术组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86%EF%BC%88Document-Processing%EF%BC%89"><span class="nav-text">2.1 文档处理（Document Processing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%90%91%E9%87%8F%E5%8C%96%EF%BC%88Embedding%EF%BC%89"><span class="nav-text">2.2 向量化（Embedding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88Vector-Database%EF%BC%89"><span class="nav-text">2.3 向量数据库（Vector Database）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%A3%80%E7%B4%A2%E7%AD%96%E7%95%A5%EF%BC%88Retrieval-Strategies%EF%BC%89"><span class="nav-text">2.4 检索策略（Retrieval Strategies）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81RAG-%E5%AE%8C%E6%95%B4%E5%AE%9E%E7%8E%B0%E7%A4%BA%E4%BE%8B"><span class="nav-text">三、RAG 完整实现示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E7%A1%80-RAG-%E7%B3%BB%E7%BB%9F"><span class="nav-text">3.1 基础 RAG 系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%AB%98%E7%BA%A7-RAG-%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="nav-text">3.2 高级 RAG 优化技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81RAG-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">四、RAG 应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%BC%81%E4%B8%9A%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94"><span class="nav-text">4.1 企业知识库问答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E6%9C%BA%E5%99%A8%E4%BA%BA"><span class="nav-text">4.2 客户服务机器人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%B3%95%E5%BE%8B-%E5%8C%BB%E7%96%97%E8%BE%85%E5%8A%A9"><span class="nav-text">4.3 法律&#x2F;医疗辅助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E4%BB%A3%E7%A0%81%E5%8A%A9%E6%89%8B"><span class="nav-text">4.4 代码助手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86"><span class="nav-text">4.5 个人知识管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81RAG-vs-%E5%BE%AE%E8%B0%83%EF%BC%88Fine-tuning%EF%BC%89"><span class="nav-text">五、RAG vs 微调（Fine-tuning）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81RAG-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">六、RAG 常见问题和解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%A3%80%E7%B4%A2%E4%B8%8D%E5%87%86%E7%A1%AE"><span class="nav-text">6.1 检索不准确</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E7%AD%94%E6%A1%88%E4%BA%A7%E7%94%9F%E5%B9%BB%E8%A7%89"><span class="nav-text">6.2 答案产生幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-text">6.3 性能优化</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="静态博客,generator by hexo,张无忌,编程, 技术博客,技术分享">
+    <meta name="description" content="无忌的自留地">
+    <meta name="author" content="张无忌">
+    
+    <title>
+        
+            开发场景常用Git命令 |
+        
+        张无忌的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.toujinggai.dpdns.org","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张无忌的博客","author":"张无忌","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","about":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2025,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="张无忌的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张无忌的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        开发场景常用Git命令
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张无忌</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-10-04 00:02:53</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Oct 21 2025 17:16:36 GMT+0800">2025-10-21 17:16:36</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            </span>
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p>Git是当今软件开发领域不可或缺的版本控制系统。无论是个人项目还是团队协作，掌握Git常用命令都是一项基本技能。本文总结了Git在日常使用中最核心的命令，帮助开发者高效地管理代码。</p>
+<h3 id="Git基本工作流程"><a href="#Git基本工作流程" class="headerlink" title="Git基本工作流程"></a>Git基本工作流程</h3><p>Git的典型工作流程如下：</p>
+<ol>
+<li><strong>克隆 (Clone)</strong> 或 <strong>初始化 (Init)</strong> 一个Git仓库。</li>
+<li>在工作目录中<strong>修改 (Modify)</strong> 文件。</li>
+<li>将修改过的文件<strong>暂存 (Stage)</strong> 到暂存区。</li>
+<li><strong>提交 (Commit)</strong> 暂存区中的文件快照到版本历史中。</li>
+<li>将本地的提交<strong>推送 (Push)</strong> 到远程仓库，或从远程仓库<strong>拉取 (Pull)</strong> 更新。</li>
+</ol>
+<h3 id="常用命令分类详解"><a href="#常用命令分类详解" class="headerlink" title="常用命令分类详解"></a>常用命令分类详解</h3><p>为了便于理解和记忆，我们将常用Git命令分为以下几类：</p>
+<hr>
+<h4 id="1-初始化与配置"><a href="#1-初始化与配置" class="headerlink" title="1. 初始化与配置"></a>1. 初始化与配置</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git init</code></td>
+<td>在当前目录初始化一个新的Git仓库。</td>
+<td><code>git init</code></td>
+</tr>
+<tr>
+<td><code>git clone [url]</code></td>
+<td>从远程URL克隆一个仓库到本地。</td>
+<td><code>git clone https://github.com/user/repo.git</code></td>
+</tr>
+<tr>
+<td><code>git config</code></td>
+<td>查看和配置Git的相关设置。</td>
+<td><code>git config --global user.name &quot;Your Name&quot;</code><br><code>git config --global user.email &quot;you@example.com&quot;</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-日常操作：添加、提交与状态查看"><a href="#2-日常操作：添加、提交与状态查看" class="headerlink" title="2. 日常操作：添加、提交与状态查看"></a>2. 日常操作：添加、提交与状态查看</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git add [file]</code></td>
+<td>将文件的修改添加到暂存区。</td>
+<td><code>git add .</code> (添加所有修改)<br><code>git add README.md</code> (添加指定文件)</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;[message]&quot;</code></td>
+<td>将暂存区的内容提交到版本历史，并附上提交信息。</td>
+<td><code>git commit -m &quot;feat: add user login feature&quot;</code></td>
+</tr>
+<tr>
+<td><code>git status</code></td>
+<td>显示工作目录和暂存区的状态。</td>
+<td><code>git status</code></td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>显示工作目录中尚未暂存的更改。</td>
+<td><code>git diff</code><br><code>git diff --staged</code> (查看已暂存的更改)</td>
+</tr>
+<tr>
+<td><code>git log</code></td>
+<td>显示从近到远的提交日志。</td>
+<td><code>git log</code><br><code>git log --oneline --graph</code> (单行图形化显示)</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="3-分支管理"><a href="#3-分支管理" class="headerlink" title="3. 分支管理"></a>3. 分支管理</h4><p>分支是Git的强大功能之一，它允许你在不影响主线开发的情况下进行独立的开发工作。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git branch</code></td>
+<td>列出、创建或删除分支。</td>
+<td><code>git branch</code> (列出本地分支)<br><code>git branch feature-x</code> (创建新分支)<br><code>git branch -d feature-x</code> (删除分支)</td>
+</tr>
+<tr>
+<td><code>git checkout [branch-name]</code></td>
+<td>切换到指定分支。</td>
+<td><code>git checkout main</code></td>
+</tr>
+<tr>
+<td><code>git checkout -b [new-branch]</code></td>
+<td>创建并立即切换到一个新分支。</td>
+<td><code>git checkout -b feature-y</code></td>
+</tr>
+<tr>
+<td><code>git merge [branch-name]</code></td>
+<td>将指定分支的历史合并到当前分支。</td>
+<td><code>git checkout main</code><br><code>git merge feature-y</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="4-远程仓库操作"><a href="#4-远程仓库操作" class="headerlink" title="4. 远程仓库操作"></a>4. 远程仓库操作</h4><p>与远程仓库的交互是团队协作的核心。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git remote -v</code></td>
+<td>列出所有配置的远程仓库。</td>
+<td><code>git remote -v</code></td>
+</tr>
+<tr>
+<td><code>git remote add [name] [url]</code></td>
+<td>添加一个新的远程仓库。</td>
+<td><code>git remote add origin https://github.com/user/repo.git</code></td>
+</tr>
+<tr>
+<td><code>git fetch [remote-name]</code></td>
+<td>从远程仓库下载最新的版本历史，但不合并。</td>
+<td><code>git fetch origin</code></td>
+</tr>
+<tr>
+<td><code>git pull [remote-name] [branch-name]</code></td>
+<td>从远程仓库抓取更新，并与本地分支合并。</td>
+<td><code>git pull origin main</code></td>
+</tr>
+<tr>
+<td><code>git push [remote-name] [branch-name]</code></td>
+<td>将本地分支的提交推送到远程仓库。</td>
+<td><code>git push origin main</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="5-撤销与修改"><a href="#5-撤销与修改" class="headerlink" title="5. 撤销与修改"></a>5. 撤销与修改</h4><p>在开发过程中，难免需要撤销或修改某些操作。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git checkout -- [file]</code></td>
+<td>丢弃工作目录中对指定文件的修改。</td>
+<td><code>git checkout -- README.md</code></td>
+</tr>
+<tr>
+<td><code>git reset HEAD [file]</code></td>
+<td>将文件从暂存区撤回到工作目录。</td>
+<td><code>git reset HEAD README.md</code></td>
+</tr>
+<tr>
+<td><code>git reset [commit]</code></td>
+<td>重置当前分支的HEAD到指定的提交，有多种模式（<code>--soft</code>, <code>--mixed</code>, <code>--hard</code>）。</td>
+<td><code>git reset --hard HEAD^</code> (回退到上一个版本)</td>
+</tr>
+<tr>
+<td><code>git revert [commit]</code></td>
+<td>创建一个新的提交来撤销指定的提交，这是一种更安全的回退方式。</td>
+<td><code>git revert abc54321</code></td>
+</tr>
+<tr>
+<td><code>git commit --amend</code></td>
+<td>修改最后一次的提交。</td>
+<td><code>git commit --amend -m &quot;A new commit message&quot;</code></td>
+</tr>
+<tr>
+<td><code>git stash</code></td>
+<td>临时保存当前未提交的修改，使工作目录变干净。</td>
+<td><code>git stash</code><br><code>git stash pop</code> (恢复并删除储藏)</td>
+</tr>
+</tbody></table>
+<p>掌握以上这些核心命令，你将能够自信地在日常开发中使用Git进行版本控制，并与团队进行高效协作。建议多加练习，熟能生巧。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2025-11-03-2025%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8F%AF%E5%8F%82%E5%8A%A0%E7%9A%84%E5%8F%8C%E5%88%9B%E8%B5%9B%E4%BA%8B%E6%B1%87%E6%80%BB.html"
+                                   title="2025年软件工程大学生双创比赛全面指南"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">2025年软件工程大学生双创比赛全面指南</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025-10-03-JAVA%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8.html"
+                                   title="JAVA接口和类的区别以及如何配合使用"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">JAVA接口和类的区别以及如何配合使用</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text">Git基本工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%88%86%E7%B1%BB%E8%AF%A6%E8%A7%A3"><span class="nav-text">常用命令分类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-text">1. 初始化与配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%EF%BC%9A%E6%B7%BB%E5%8A%A0%E3%80%81%E6%8F%90%E4%BA%A4%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B"><span class="nav-text">2. 日常操作：添加、提交与状态查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-text">3. 分支管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-text">4. 远程仓库操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%92%A4%E9%94%80%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="nav-text">5. 撤销与修改</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张无忌</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text">Git基本工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%88%86%E7%B1%BB%E8%AF%A6%E8%A7%A3"><span class="nav-text">常用命令分类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-text">1. 初始化与配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C%EF%BC%9A%E6%B7%BB%E5%8A%A0%E3%80%81%E6%8F%90%E4%BA%A4%E4%B8%8E%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B"><span class="nav-text">2. 日常操作：添加、提交与状态查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-text">3. 分支管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-text">4. 远程仓库操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%92%A4%E9%94%80%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="nav-text">5. 撤销与修改</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
