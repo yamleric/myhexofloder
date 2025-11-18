@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="静态博客,generator by hexo,张无忌,编程, 技术博客,技术分享">
+    <meta name="description" content="无忌的自留地">
+    <meta name="author" content="张无忌">
+    
+    <title>
+        
+            Map数据类型详解 |
+        
+        张无忌的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.toujinggai.dpdns.org","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"张无忌的博客","author":"张无忌","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","about":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2025,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="张无忌的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               张无忌的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Map数据类型详解
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">张无忌</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-11-18 21:24:49</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Tue Nov 18 2025 21:50:19 GMT+0800">2025-11-18 21:50:19</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>813 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+            </span>
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="Map-数据类型详解"><a href="#Map-数据类型详解" class="headerlink" title="Map 数据类型详解"></a>Map 数据类型详解</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>Map 是一种 <strong>键值对(Key-Value)</strong> 的数据结构,用于存储一对一的映射关系。</p>
+<ul>
+<li><strong>K (Key)</strong>: 键,用于唯一标识一个值,类似字典的目录索引</li>
+<li><strong>V (Value)</strong>: 值,与键关联的实际数据</li>
+</ul>
+<p><strong>类比理解</strong>:就像一本字典,K是要查的词,V是词的解释。</p>
+<h2 id="基本特性"><a href="#基本特性" class="headerlink" title="基本特性"></a>基本特性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Map的基本使用</span></span><br><span class="line">Map&lt;String, Integer&gt; ageMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 存储键值对</span></span><br><span class="line">ageMap.put(<span class="string">&quot;张三&quot;</span>, <span class="number">25</span>);  <span class="comment">// &quot;张三&quot;是K, 25是V</span></span><br><span class="line">ageMap.put(<span class="string">&quot;李四&quot;</span>, <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过K获取V</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">age</span> <span class="operator">=</span> ageMap.get(<span class="string">&quot;张三&quot;</span>);  <span class="comment">// 返回 25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// K是唯一的,重复的K会覆盖旧值</span></span><br><span class="line">ageMap.put(<span class="string">&quot;张三&quot;</span>, <span class="number">26</span>);  <span class="comment">// 张三的年龄被更新为26</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常见实现类"><a href="#常见实现类" class="headerlink" title="常见实现类"></a>常见实现类</h2><ol>
+<li><strong>HashMap</strong>: 最常用,无序,允许null键和值</li>
+<li><strong>LinkedHashMap</strong>: 保持插入顺序</li>
+<li><strong>TreeMap</strong>: 按键自动排序</li>
+<li><strong>ConcurrentHashMap</strong>: 线程安全</li>
+</ol>
+<h2 id="在-Spring-框架中的常见应用"><a href="#在-Spring-框架中的常见应用" class="headerlink" title="在 Spring 框架中的常见应用"></a>在 Spring 框架中的常见应用</h2><h3 id="1-接收前端传递的动态参数"><a href="#1-接收前端传递的动态参数" class="headerlink" title="1. 接收前端传递的动态参数"></a>1. 接收前端传递的动态参数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 接收JSON格式的任意键值对</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/user/update&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">updateUser</span><span class="params">(<span class="meta">@RequestBody</span> Map&lt;String, Object&gt; params)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) params.get(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">age</span> <span class="operator">=</span> (Integer) params.get(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        <span class="comment">// 可以灵活处理不确定字段的数据</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-返回灵活的响应数据"><a href="#2-返回灵活的响应数据" class="headerlink" title="2. 返回灵活的响应数据"></a>2. 返回灵活的响应数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/user/info&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title function_">getUserInfo</span><span class="params">()</span> &#123;</span><br><span class="line">    Map&lt;String, Object&gt; result = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    result.put(<span class="string">&quot;code&quot;</span>, <span class="number">200</span>);</span><br><span class="line">    result.put(<span class="string">&quot;message&quot;</span>, <span class="string">&quot;成功&quot;</span>);</span><br><span class="line">    result.put(<span class="string">&quot;data&quot;</span>, userObject);</span><br><span class="line">    <span class="keyword">return</span> result;  <span class="comment">// 自动转为JSON: &#123;&quot;code&quot;:200, &quot;message&quot;:&quot;成功&quot;, &quot;data&quot;:&#123;...&#125;&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-依赖注入中管理Bean集合"><a href="#3-依赖注入中管理Bean集合" class="headerlink" title="3. 依赖注入中管理Bean集合"></a>3. 依赖注入中管理Bean集合</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PaymentConfig</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Spring会自动注入所有PaymentService类型的Bean</span></span><br><span class="line">    <span class="comment">// K是Bean的名称,V是Bean实例</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, PaymentService&gt; paymentServices;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> PaymentService <span class="title function_">getPaymentService</span><span class="params">(String type)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> paymentServices.get(type);  <span class="comment">// 根据类型获取不同的支付实现</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-缓存管理"><a href="#4-缓存管理" class="headerlink" title="4. 缓存管理"></a>4. 缓存管理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CacheService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 简单的内存缓存</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; cache = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(String key, Object value)</span> &#123;</span><br><span class="line">        cache.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">get</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> cache.get(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-动态SQL参数-MyBatis"><a href="#5-动态SQL参数-MyBatis" class="headerlink" title="5. 动态SQL参数(MyBatis)"></a>5. 动态SQL参数(MyBatis)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用Map传递动态查询条件</span></span><br><span class="line">    List&lt;User&gt; <span class="title function_">selectByConditions</span><span class="params">(Map&lt;String, Object&gt; conditions)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- MyBatis XML --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByConditions&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;User&quot;</span>&gt;</span></span><br><span class="line">    SELECT * FROM user WHERE 1=1</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;name != null&quot;</span>&gt;</span></span><br><span class="line">        AND name = #&#123;name&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;age != null&quot;</span>&gt;</span></span><br><span class="line">        AND age = #&#123;age&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-配置属性映射"><a href="#6-配置属性映射" class="headerlink" title="6. 配置属性映射"></a>6. 配置属性映射</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;app&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 读取配置文件中的键值对</span></span><br><span class="line">    <span class="comment">// app.settings.key1=value1</span></span><br><span class="line">    <span class="comment">// app.settings.key2=value2</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, String&gt; settings;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// getter/setter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实际应用示例"><a href="#实际应用示例" class="headerlink" title="实际应用示例"></a>实际应用示例</h2><p><strong>策略模式实现</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, PaymentStrategy&gt; paymentStrategyMap;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pay</span><span class="params">(String paymentType, BigDecimal amount)</span> &#123;</span><br><span class="line">        <span class="comment">// 根据支付类型动态选择策略</span></span><br><span class="line">        <span class="type">PaymentStrategy</span> <span class="variable">strategy</span> <span class="operator">=</span> paymentStrategyMap.get(paymentType);</span><br><span class="line">        strategy.pay(amount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不同的支付策略Bean</span></span><br><span class="line"><span class="meta">@Component(&quot;alipay&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlipayStrategy</span> <span class="keyword">implements</span> <span class="title class_">PaymentStrategy</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component(&quot;wechat&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WechatStrategy</span> <span class="keyword">implements</span> <span class="title class_">PaymentStrategy</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><strong>K</strong>: 唯一标识符,用于快速查找</li>
+<li><strong>V</strong>: 与K关联的实际数据</li>
+<li><strong>Spring中</strong>: 主要用于灵活处理动态数据、管理Bean集合、实现策略模式等场景</li>
+</ul>
+<p>Map的核心优势是<strong>通过键快速定位值</strong>,时间复杂度O(1),非常高效!</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/posts/Spring-Boot-Maven-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%AE%9E%E7%94%A8%E5%BB%BA%E8%AE%AE/"
+                                   title="Spring Boot Maven 依赖管理实用建议"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Spring Boot Maven 依赖管理实用建议</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3"><span class="nav-text">Map 数据类型详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-text">基本特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-text">常见实现类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Spring-%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8"><span class="nav-text">在 Spring 框架中的常见应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E4%BC%A0%E9%80%92%E7%9A%84%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0"><span class="nav-text">1. 接收前端传递的动态参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BF%94%E5%9B%9E%E7%81%B5%E6%B4%BB%E7%9A%84%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="nav-text">2. 返回灵活的响应数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%AE%A1%E7%90%86Bean%E9%9B%86%E5%90%88"><span class="nav-text">3. 依赖注入中管理Bean集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">4. 缓存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%8A%A8%E6%80%81SQL%E5%8F%82%E6%95%B0-MyBatis"><span class="nav-text">5. 动态SQL参数(MyBatis)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E6%98%A0%E5%B0%84"><span class="nav-text">6. 配置属性映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">实际应用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">张无忌</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Map-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3"><span class="nav-text">Map 数据类型详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-text">基本特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="nav-text">常见实现类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Spring-%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E5%B8%B8%E8%A7%81%E5%BA%94%E7%94%A8"><span class="nav-text">在 Spring 框架中的常见应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E4%BC%A0%E9%80%92%E7%9A%84%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0"><span class="nav-text">1. 接收前端传递的动态参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BF%94%E5%9B%9E%E7%81%B5%E6%B4%BB%E7%9A%84%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="nav-text">2. 返回灵活的响应数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%AD%E7%AE%A1%E7%90%86Bean%E9%9B%86%E5%90%88"><span class="nav-text">3. 依赖注入中管理Bean集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-text">4. 缓存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%8A%A8%E6%80%81SQL%E5%8F%82%E6%95%B0-MyBatis"><span class="nav-text">5. 动态SQL参数(MyBatis)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E6%98%A0%E5%B0%84"><span class="nav-text">6. 配置属性映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">实际应用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
